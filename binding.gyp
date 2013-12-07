@@ -2,7 +2,7 @@
   'targets' : [
     {
       'target_name' : 'odbc_bindings',
-      'sources' : [ 
+      'sources' : [
         'src/odbc.cpp',
         'src/odbc_connection.cpp',
         'src/odbc_statement.cpp',
@@ -12,10 +12,13 @@
       'defines' : [
         'UNICODE'
       ],
+      'cflags': [
+        '-Wno-int-to-pointer-cast'
+      ],
       'conditions' : [
         [ 'OS == "linux"', {
-          'libraries' : [ 
-            '-lodbc' 
+          'libraries' : [
+            '-lodbc'
           ],
           'cflags' : [
             '-g'
@@ -24,16 +27,16 @@
         [ 'OS == "mac"', {
           'libraries' : [
             '-L/usr/local/lib',
-            '-lodbc' 
+            '-lodbc'
           ]
         }],
-        [ 'OS=="win"', {
+        [ 'OS == "win"', {
           'sources' : [
             'src/strptime.c',
             'src/odbc.cpp'
           ],
-          'libraries' : [ 
-            '-lodbccp32.lib' 
+          'libraries' : [
+            '-lodbccp32.lib'
           ]
         }]
       ]
